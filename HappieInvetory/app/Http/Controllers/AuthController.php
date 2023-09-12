@@ -50,9 +50,7 @@ if (empty($request->password) || !Hash::check($request->password, $user->passwor
     }
     public function RegisterUser(Request $request)
     {    
-      
-      
-
+         
             $request->validate([
                 'username' => 'required',
                 'password' => 'required|confirmed',

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\mainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 //login routes
 Route::get('/',[AuthController::class,'logininterface'])->name('login');
+Route::get('/employee',[mainController::class,'employee'])->name('employee');
+
+
 Route::post('/newuser',[AuthController::class,'newuser'])->name('welcome');
 Route::post('/login',[AuthController::class,'UserLogin'])->name('userlogin');
 
