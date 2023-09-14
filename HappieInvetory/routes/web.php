@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\mainController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//registration routes
+// Route::post('/register',[AuthController::class,'RegisterUser'])->name('register');
+// Route::get('/register',[AuthController::class,'registration'])->name('register');
+
+
 //login routes
 Route::get('/',[AuthController::class,'logininterface'])->name('login');
 Route::get('/employee',[mainController::class,'employee'])->name('employee');
@@ -22,7 +28,10 @@ Route::get('/employee',[mainController::class,'employee'])->name('employee');
 Route::post('/newuser',[AuthController::class,'newuser'])->name('welcome');
 Route::post('/login',[AuthController::class,'UserLogin'])->name('userlogin');
 
-//registration routes
-// Route::post('/register',[AuthController::class,'RegisterUser'])->name('register');
-// Route::get('/register',[AuthController::class,'registration'])->name('register');
+
+//product routes 
+
+Route::post('/addProduct',[ProductController::class,'productForm'])->name('addProduct');
+
+
 

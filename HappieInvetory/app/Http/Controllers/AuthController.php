@@ -85,4 +85,5 @@ if (empty($request->password) || !Hash::check($request->password, $user->passwor
     {
          return view('Auth.login');
     }
+  
 }
