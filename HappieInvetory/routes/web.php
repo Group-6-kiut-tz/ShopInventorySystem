@@ -30,8 +30,25 @@ Route::post('/login',[AuthController::class,'UserLogin'])->name('userlogin');
 
 
 //product routes 
-
+Route::get('/viewProduct',[ProductController::class,'productView'])->name('viewProduct');
 Route::post('/addProduct',[ProductController::class,'productForm'])->name('addProduct');
+Route::get('/productList',[ProductController::class,'productFetch'])->name('productList');
+Route::get('/editProduct/{id}',[ProductController::class,'edit'])->name('editProduct');
+Route::put('/updateProduct/{id}', [ProductController::class, 'update'])->name('updateProduct');
+Route::delete('/deleteProduct/{id}', [ProductController::class, 'destroyProduct'])->name('deleteProduct');
+
+
+//sales Routes
+Route::get('/viewSales',[ProductController::class,'SalesView'])->name('viewSales');
+Route::post('/addSales',[ProductController::class,'SalesForm'])->name('addSales');
+Route::get('/salesList',[ProductController::class,'SalesFetch'])->name('salesList');
+Route::get('/editSales/{id}',[ProductController::class,'salesEdit'])->name('editSales');
+Route::put('/updateSales/{id}', [ProductController::class, 'SalesUpdate'])->name('update');
+Route::delete('/deleteSales/{id}', [ProductController::class, 'destroySales'])->name('deleteSales');
+
+
+//routes for profiy
+
 
 
 
