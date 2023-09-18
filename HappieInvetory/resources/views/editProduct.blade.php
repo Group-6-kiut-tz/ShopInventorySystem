@@ -3,7 +3,7 @@
 
 @section('title')
 
-    Products
+    Edit Products
     
 @endsection 
 
@@ -54,6 +54,4 @@
         </form>
     </div>
 
-   
-</body>
-</html>
+@endsection

@@ -11,7 +11,7 @@
 </head>
 <body>
     @include('menu')
-    <div class="container" style="margin-left:15vw;">
+    <div class="container" style="margin-left: 16vw;">
         @yield('content')
     </div>
 </body>
