@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Productslist;
 use App\Models\SaleList;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -101,8 +103,31 @@ return redirect()->route('productList')->with('success', 'Product updated succes
             'SalePrice' => 'required',
             'TotalSales' => 'required|numeric|min:0',
             'TotalProfit' => 'required|numeric',
+            'SaleDate' => 'required|date',
 
         ]);
+
+
+        $productCategory = $request->input('Product_Category');
+        $productName = $request->input('ProductName');
+        $quantitySold = $request->input('Quantity');
+
+        $product = Productslist::where('Product_Category', $productCategory)
+                                ->where('ProductName', $productName)
+                                ->first();
+
+
+        // Check if product exists
+    $product = Productslist::where('ProductName', $validateSale['ProductName'])->first();
+    
+    if (!$product) {
+        return redirect()->back()->with('error', 'Product not found.');
+    }
+
+    // Check if quantity being sold is greater than available quantity
+    if ($validateSale['Quantity'] > $product->Quantity) {
+        return redirect()->back()->with('error', 'Cannot sell more than available quantity.');
+    }
 
         // saving data to database
         $sales = new SaleList();
@@ -113,10 +138,16 @@ return redirect()->route('productList')->with('success', 'Product updated succes
         $sales->SalePrice =    $validateSale ['SalePrice'];
         $sales->TotalSales =  $validateSale ['TotalSales'];
         $sales->TotalProfit =  $validateSale ['TotalProfit'];
+        $sales->sale_date =  $validateSale['SaleDate'];
         $sales->save();
+        $product->Quantity -= $quantitySold;
+        $product->save();
 
         return redirect()->route('viewSales')->with('success', 'Sales record added successfully');
     }
+
+
+
 
     public function SalesFetch(){
         $sales = SaleList::all();
@@ -165,6 +196,34 @@ return redirect()->route('productList')->with('success', 'Product updated succes
     }
 
     
+
+    public function calculateProfits(Request $request) {
+        $today = Carbon::now()->toDateString();
+        $startOfWeek = Carbon::now()->startOfWeek()->toDateString();
+        $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
+        $startOfYear = Carbon::now()->startOfYear()->toDateString();
+    
+        $profits = [
+            'today' => $this->calculateProfitForDateRange($today),
+            'this_week' => $this->calculateProfitForDateRange($startOfWeek),
+            'this_month' => $this->calculateProfitForDateRange($startOfMonth),
+            'this_year' => $this->calculateProfitForDateRange($startOfYear),
+        ];
+    
+        return view('profitCards', compact('profits'));
+    }
+
+
+    private function calculateProfitForDateRange($startDate) {
+        $endDate = Carbon::parse($startDate)->endOfDay();
+        $startDate = Carbon::parse($startDate)->startOfDay();
+    
+        $totalProfit = DB::table('sale_lists')
+            ->whereBetween('sale_date', [$startDate, $endDate])
+            ->sum('TotalProfit');
+    
+        return $totalProfit;
+    }
    
     }
 

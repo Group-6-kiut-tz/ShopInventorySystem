@@ -47,7 +47,8 @@ Route::put('/updateSales/{id}', [ProductController::class, 'SalesUpdate'])->name
 Route::delete('/deleteSales/{id}', [ProductController::class, 'destroySales'])->name('deleteSales');
 
 
-//routes for profiy
+//routes for profit summary
+Route::get('/profit-summary', [ProductController::class, 'calculateProfits'])->name('profitSummary');
 
 
 

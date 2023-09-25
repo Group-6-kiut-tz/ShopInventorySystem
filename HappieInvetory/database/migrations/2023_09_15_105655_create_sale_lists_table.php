@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('SalePrice');
             $table->string('TotalSales');
             $table->string('TotalProfit');
+            $table->date('sale_date');
             $table->timestamps();
         });
     }

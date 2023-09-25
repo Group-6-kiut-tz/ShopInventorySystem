@@ -15,6 +15,12 @@
     <div class="container d-flex justify-content-center mt-5 pt-5" style=" overflow-x: hidden;">
         <div class="body" style="width: 70%; height: auto; box-shadow: 5px 5px 10px grey;">
             <h1 class="p-3"><b>Add Sales</b></h1>
+            <!-- Display error message if it exists -->
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
             <form action="{{ route('addSales') }}" method="POST" id="salesForm" class="p-4">
                 @csrf
                 
@@ -64,6 +70,10 @@
                 <div class="form-group">
                     <label for="totalProfit">Total Profit:</label>
                     <input type="text" class="form-control" id="TotalProfit" name="TotalProfit" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="saleDate">Sale Date:</label>
+                    <input type="date" class="form-control" id="SaleDate" name="SaleDate" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3">Add sell</button>

@@ -11,6 +11,11 @@
     <div class="container mt-5 pt-5 d-flex justify-content-center">
         <div class="body" style="width: 70%; height: 80vh; box-shadow: 5px 5px 10px grey;">
             <h1 class="m-3"><b>Add Product</b></h1>
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
             <form action=" {{ route('addProduct') }}" method="POST" style="" class="p-3">
                 @csrf
                 <div class="form-group">
