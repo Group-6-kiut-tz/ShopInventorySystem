@@ -17,9 +17,9 @@
   
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Product List</h1>
-        <table class="table">
+    <div class="container" style="width: 90%; height: auto; box-shadow: 5px 5px 10px grey; margin-top: 15vh;">
+        <h1 class="p-3"><b>Product List</b></h1>
+        <table class="table"  style="width: 100%;">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
@@ -32,30 +32,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $prods)
-                    
-                
-                <tr>
-                    <th scope="row">{{ $prods->id }}</th>
-                    <td>{{ $prods->	Product_Category }}</td>
-                    <td>{{ $prods->	ProductName}}</td>
-                    <td>{{ $prods->	Quantity }}</td>
-                    <td>{{ $prods->	BuyPrice}}</td>
-                    <td>{{ $prods->	SalePrice}}</td>
-                    
-                    <td>
-                        <a href="{{ route('editProduct', ['id' => $prods->id]) }}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                    </td>
-                        <td>
+                @foreach ($products as $prods)                             
+                    <tr>
+                        <th scope="row">{{ $prods->id }}</th>
+                        <td>{{ $prods->	Product_Category }}</td>
+                        <td>{{ $prods->	ProductName}}</td>
+                        <td>{{ $prods->	Quantity }}</td>
+                        <td>{{ $prods->	BuyPrice}}</td>
+                        <td>{{ $prods->	SalePrice}}</td>                        
+                        <td class="d-flex">
+                            <a href="{{ route('editProduct', ['id' => $prods->id]) }}" class="btn btn-info btn-sm"></i> Edit</a>                        
                             <form action="{{ route('deleteProduct', ['id' => $prods->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm ms-2">Delete</button>
                             </form>
-                        </td>
-                     
-
-                </tr>
+                        </td>                    
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -65,3 +58,5 @@
    
 </body>
 </html>
+
+@endsection

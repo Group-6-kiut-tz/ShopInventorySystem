@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
-<div class="header bg-dark" style="width: 15vw; height: 100vh; position: fixed;">
+<div class="header bg-dark" style="width: 15vw; height: 100vh; position: fixed; top: 0;">
     <div class="top bg-info" style="height: 15vh;">
             
     </div>
